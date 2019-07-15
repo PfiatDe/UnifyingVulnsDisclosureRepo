@@ -1766,7 +1766,7 @@ func main() {
 		}
 		if strings.Contains(arg, "forcedpairing") {
 			fmt.Println("try to pair against a known adress")
-			len(os.Args) == 2 {
+			if(len(os.Args) == 2) {
 				TestPairFlooding(os.Args[2])
 			}
 		}
