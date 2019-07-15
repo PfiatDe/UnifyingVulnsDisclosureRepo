@@ -642,10 +642,10 @@ func SimulatePairingDongle(nrf24 *unifying.NRF24, ch byte) {
 func AESBrute() {
 	data := []byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf}
 	key := make([]byte, 16)
-	count := 0xffffffff
+	count := int64(0xffffffff)
 
 	now := time.Now()
-	for i := 0; i < count; i++ {
+	for i := int64(0); i < count; i++ {
 		if i%100000 == 0 {
 
 			fmt.Printf("100000 rounds aes128 after %v, tested: %08x\n", time.Since(now), i)
@@ -897,8 +897,8 @@ func BruteForceKeyNaive(frame []byte, dongleSerial []byte, deviceWPID []byte, do
 	decrypt := make([]byte, 8)
 
 	start := time.Now()
-	for devNonce := 0; devNonce < 0x100000000; devNonce++ {
-		for dongleNonce := 0; dongleNonce < 0x100000000; dongleNonce++ {
+	for devNonce := int64(0); devNonce < 0x100000000; devNonce++ {
+		for dongleNonce := int64(0); dongleNonce < 0x100000000; dongleNonce++ {
 			devNonceByte[0] = byte((devNonce & 0xff000000) >> 24)
 			devNonceByte[1] = byte((devNonce & 0x00ff0000) >> 16)
 			devNonceByte[2] = byte((devNonce & 0x0000ff00) >> 8)
