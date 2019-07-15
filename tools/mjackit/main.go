@@ -122,6 +122,7 @@ func (d *Device) FindCurrentChannel(nrf24 *unifying.NRF24) (channel byte, err er
 }
 
 func SimulatePairingDevice(nrf24 *unifying.NRF24, deviceName string, deviceType unifying.LogitechDeviceType, caps unifying.LogitechDeviceCapabilities, serial []byte, nonce []byte, devRepTypes unifying.LogitechDeviceReportTypes) (assignedAdress unifying.Nrf24Addr) {
+	fmt.Println(unifying.LogitechPairingAddr)
 	return SimulatePairingDeviceForced(nrf24, unifying.LogitechPairingAddr, deviceName, deviceType, caps, serial, nonce, devRepTypes)
 }
 
@@ -1762,6 +1763,12 @@ func main() {
 		if strings.Contains(arg, "pairflood") {
 			fmt.Println("each time a dongle is put into pairing mode, a new device will be paired immediately")
 			TestPairFlooding()
+		}
+		if strings.Contains(arg, "forcedpairing") {
+			fmt.Println("try to pair against a known adress")
+			len(os.Args) == 2 {
+				TestPairFlooding(os.Args[2])
+			}
 		}
 	}
 
